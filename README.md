@@ -31,22 +31,24 @@ Added packages:
 - [React Highlight Words](https://www.npmjs.com/package/react-highlight-words) - Allows you to highlight the search term in the text.
 - [React Keydown](https://github.com/ayrton/react-key-handler) - Made it easy to work with keyboard events.
 
-### Known Issues
+## Improvements to be Made
 
-#### Search
+### Search
 
 This is a really basic search function. Ideally this would not take place on the client side, but rather we would make an API call to fetch data that fits our query, but in this case with no server, it fits the assigned project.
 
 Also as it searches in the on change it would need to be debounced for a live app that is making API calls instead of client side filtering. One could also add in a button to make the API calls. It would then be easy to make a list of recent searches. I decided to keep it simple and keep the live `onChange` search here.
 
-#### Tags
+### Tags
 
 The tagging function is not ideal as we are not updating a db. In this case it is simply updating the client state. This is an issue as it is slow. Sometimes there is a lag as the filter and map functions work through the data. Ideally the tag should update the db with an API call. That way you only have to worry about the one report being updated. Since it was all done on the client side, this way works, but it could be improved with a full stack application.
 
 The directions were a bit unclear as to how to tag. I was not sure if they could be tagged with more than one tag, or if multiples were needed. I decided to allow for multiple tags. This is of course something that I would clear up with my team and the product designers before making a decision like that, but I made the executive decision in this case.
 
-#### Design
+### Design
 
 It isn't going to win any design awards, but it is clean and functional.  It could use more dynamic design to make it more exciting for the user. I love working with the product designers to implement their vision.
 
 I didn't do too much for the mobile views in this case as it seems like it would be a web based application that is used on PC.  I would normally make sure that it takes advantage of mobile and tablet views, but in this case with limited time it is optimized for PC.  It is responsive, but could have more done for the mobile and tablets.
+
+Also I would purge the unused TailwindCSS styles for a production app.  The whole Tailwind file is in here as the default.  I would also use more component based and reusable styling in version that needs to scale.
