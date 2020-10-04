@@ -51,33 +51,12 @@ const TagReport = ({
   return (
     <>
       {!loading ? (
-        <div>
-          <h4>Active Tags</h4>
-          {report.tags.map((tag) => (
-            <button
-              className={`${tag.background}`}
-              disabled={loading}
-              key={tag.id}
-              onClick={() => toggleTag(report.id, tag)}
-            >
-              <KeyHandler
-                keyEventName={KEYPRESS}
-                keyValue={`${tag.id}`}
-                onKeyHandle={() => {
-                  if (currentSlide === idx) {
-                    toggleTag(report.id, tag);
-                  }
-                }}
-              />
-              {tag.text}
-            </button>
-          ))}
-          <h4>Inactive Tags</h4>
-          {tags
-            .filter(({ id: id1 }) => !report.tags.some(({ id: id2 }) => id2 === id1))
-            .map((tag) => (
+        <div className='border-r border-r-grey-400 pr-4'>
+          <div className='mb-4'>
+            <h4 className='border border-grey-400 py-1 px-3 text-center mb-2'>Active Tags</h4>
+            {report.tags.map((tag) => (
               <button
-                className={`${tag.background}`}
+                className={`${tag.background} block rounded-lg py-1 px-2 m-1 text-gray-700 text-sm`}
                 disabled={loading}
                 key={tag.id}
                 onClick={() => toggleTag(report.id, tag)}
@@ -94,6 +73,31 @@ const TagReport = ({
                 {tag.text}
               </button>
             ))}
+          </div>
+          <div className='mb-4'>
+            <h4 className='border border-grey-400 py-1 px-3 text-center mb-2'>Inactive Tags</h4>
+            {tags
+              .filter(({ id: id1 }) => !report.tags.some(({ id: id2 }) => id2 === id1))
+              .map((tag) => (
+                <button
+                  className={`${tag.background} block rounded-lg py-1 px-2 m-1 text-gray-700 text-sm`}
+                  disabled={loading}
+                  key={tag.id}
+                  onClick={() => toggleTag(report.id, tag)}
+                >
+                  <KeyHandler
+                    keyEventName={KEYPRESS}
+                    keyValue={`${tag.id}`}
+                    onKeyHandle={() => {
+                      if (currentSlide === idx) {
+                        toggleTag(report.id, tag);
+                      }
+                    }}
+                  />
+                  {tag.text}
+                </button>
+              ))}
+          </div>
         </div>
       ) : (
         <p>Adding Tag...</p>

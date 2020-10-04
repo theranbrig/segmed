@@ -607,15 +607,10 @@ video {
 
 [class^='number-slide'],
 [class*=' number-slide'] {
-  background: grey;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.number-slide1 {
-  background: rgb(64, 175, 255);
-  background: linear-gradient(128deg, rgba(64, 175, 255, 1) 0%, rgba(63, 97, 255, 1) 100%);
 }
 
 .navigation-wrapper {
@@ -629,7 +624,7 @@ video {
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
-  fill: #fff;
+  fill: #000;
   cursor: pointer;
 }
 
@@ -642,8 +637,15 @@ video {
   right: 5px;
 }
 
+.arrow--label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(20px);
+  -webkit-transform: translateY(20px);
+}
+
 .arrow--disabled {
-  fill: rgba(255, 255, 255, 0.5);
+  fill: rgba(0, 0, 0, 0.5);
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

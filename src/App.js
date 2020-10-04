@@ -6,9 +6,19 @@ import Tag from './components/Tag';
 
 function App() {
   const [reports, setReports] = useState([]);
-  const [filteredReports, setFilteredReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([
+    {
+      id: 1,
+      text: 'Burn of third degree of left axilla',
+      tags: [
+        { id: 1, text: '#goodreport (1)', background: 'bg-green-300' },
+        { id: 2, text: '#conditionfound (2)', background: 'bg-red-300' },
+      ],
+      title: 'Report Title 1',
+    },
+  ]);
   const [searchText, setSearchText] = useState('');
-  const [viewReport, setViewReport] = useState(null);
+  const [viewReport, setViewReport] = useState(0);
 
   useEffect(() => {
     fetch('http://localhost:3000/files.json')
@@ -61,11 +71,13 @@ function App() {
                 key={report.id}
               >
                 <span>{idx + 1}. </span>
-                <button className='text-left' onClick={() => setViewReport(idx)}>
-                  {report.title}
+                <span>
+                  <button className='text-left font-bold' onClick={() => setViewReport(idx)}>
+                    {report.title}
+                  </button>
                   {' - '}
                   <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
-                </button>{' '}
+                </span>
                 <ul className='text-right'>
                   {report.tags
                     .sort((a, b) => a.id - b.id)
@@ -104,6 +116,7 @@ function App() {
           setViewReport={setViewReport}
           setReports={setReports}
           setFilteredReports={setFilteredReports}
+          searchText={searchText}
         />
       ) : null}
     </div>
