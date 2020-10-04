@@ -6,19 +6,9 @@ import Tag from './components/Tag';
 
 function App() {
   const [reports, setReports] = useState([]);
-  const [filteredReports, setFilteredReports] = useState([
-    {
-      id: 1,
-      text: 'Burn of third degree of left axilla',
-      tags: [
-        { id: 1, text: '#goodreport (1)', background: 'bg-green-300' },
-        { id: 2, text: '#conditionfound (2)', background: 'bg-red-300' },
-      ],
-      title: 'Report Title 1',
-    },
-  ]);
+  const [filteredReports, setFilteredReports] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const [viewReport, setViewReport] = useState(0);
+  const [viewReport, setViewReport] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3000/files.json')
@@ -94,7 +84,7 @@ function App() {
               >
                 <span className='mr-4'>{idx + 1}. </span>
                 <span>
-                  {report.title} - {report.text}
+                  <span className='font-bold'>{report.title}</span> - {report.text}
                 </span>
                 <ul className='text-right'>
                   {report.tags.length ? (
