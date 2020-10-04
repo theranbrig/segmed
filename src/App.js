@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Slider from './components/Slider';
 import Highlighter from 'react-highlight-words';
 import Tag from './components/Tag';
+import StandardListItem from './components/StandardListItem';
+import ClickListItem from './components/ClickListItem';
 
 function App() {
   const [reports, setReports] = useState([]);
@@ -56,46 +58,16 @@ function App() {
       <ul className='list-none'>
         {filteredReports.length
           ? filteredReports.map((report, idx) => (
-              <li
-                className='grid grid-cols-report text-left py-3 border-t border-t-blue-300 items-start'
+              <ClickListItem
                 key={report.id}
-              >
-                <span>{idx + 1}. </span>
-                <span>
-                  <button className='text-left font-bold' onClick={() => setViewReport(idx)}>
-                    {report.title}
-                  </button>
-                  {' - '}
-                  <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
-                </span>
-                <ul className='text-right'>
-                  {report.tags
-                    .sort((a, b) => a.id - b.id)
-                    .map((tag) => (
-                      <Tag key={tag.id} tag={tag} />
-                    ))}
-                </ul>
-              </li>
+                report={report}
+                idx={idx}
+                searchText={searchText}
+                setViewReport={setViewReport}
+              />
             ))
           : reports.map((report, idx) => (
-              <li
-                className='grid grid-cols-report text-left py-3 border-t border-t-blue-300 items-start'
-                key={report.id}
-              >
-                <span className='mr-4'>{idx + 1}. </span>
-                <span>
-                  <span className='font-bold'>{report.title}</span> - {report.text}
-                </span>
-                <ul className='text-right'>
-                  {report.tags.length ? (
-                    report.tags
-                      .sort((a, b) => a.id - b.id)
-                      .map((tag) => <Tag key={tag.id} tag={tag} />)
-                  ) : (
-                    <p className='text-center'> - </p>
-                  )}
-                </ul>
-              </li>
+              <StandardListItem key={report.id} report={report} idx={idx} />
             ))}
       </ul>
       {viewReport !== null ? (
