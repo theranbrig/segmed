@@ -18,7 +18,11 @@ const ClickListItem = ({ report, idx, searchText, setViewReport }) => {
           {report.title}
         </button>
         {' - '}
-        <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
+        <Highlighter
+          highlightClassName='bg-blue-200'
+          searchWords={[searchText]}
+          textToHighlight={report.text}
+        />
       </span>
       <ul className='text-right'>
         {report.tags

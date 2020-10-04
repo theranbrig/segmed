@@ -19,7 +19,7 @@ Application was build using React, TailwindCSS and a few other node packages to 
 
 Primarily the app utilizes React and is split up for cleaner architecture. I mimicked the data fetching by using the putting the "reports" into a json file and fetched them in the same way that I would from a REST API.
 
-The search function is basically turns the entire text of the report into a giant string. We can then check if the search term is present in said string. This one does not account for punctuation, but a regex could be added to remove any punctuation. It also need exact spelling, it does not do near search at this time. Letter case does not matter. It live searches as you type and gives results on the fly.
+The search function is basically turns the entire text of the report into a giant string. We can then check if the search term is present in said string. This one does not account for punctuation, but a regex could be added to remove any punctuation. It also need exact spelling, it does not do near search at this time. Letter case does not matter. It live searches as you type and gives results on the fly.  The text on these is fairly short, but it would work the same for any length of text.
 
 Styling was kept to a minimum as I am not a designer, but I did use TailwindCSS which was recommended in the directions. I tried to keep it simple and readable. It is a simple list, but a table could have been used as well.
 
@@ -47,6 +47,6 @@ The directions were a bit unclear as to how to tag. I was not sure if they could
 
 #### Design
 
-It isn't going to win any design awards, but it is clean and functional.  It could use more dynamic design to make it more exciting for the user. I am great at implementing UI from the design team.
+It isn't going to win any design awards, but it is clean and functional.  It could use more dynamic design to make it more exciting for the user. I love working with the product designers to implement their vision.
 
-Responsiveness.  I somewhat ignored responsiveness in this case as it seems like it would be a web based application that is used on PC.  I would normally make sure that it takes advantage of mobile and tablet views, but in this case with limited time it is optimized for PC.
+I didn't do too much for the mobile views in this case as it seems like it would be a web based application that is used on PC.  I would normally make sure that it takes advantage of mobile and tablet views, but in this case with limited time it is optimized for PC.  It is responsive, but could have more done for the mobile and tablets.

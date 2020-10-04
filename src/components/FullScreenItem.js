@@ -35,7 +35,11 @@ const FullScreenItem = ({
         />
         <div className=' w-3/4 lg:w-1/2 mx-auto pl-3'>
           <h3 className='font-bold'>{report.title}</h3>
-          <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
+          <Highlighter
+            highlightClassName='bg-blue-200'
+            searchWords={[searchText]}
+            textToHighlight={report.text}
+          />
         </div>
       </div>
     </div>

@@ -2,10 +2,7 @@
   {
     "id": 1,
     "text": "Burn of third degree of left axilla",
-    "tags": [
-      { "id": 1, "text": "#goodreport (1)", "background": "bg-green-300" },
-      { "id": 2, "text": "#conditionfound (2)", "background": "bg-red-300" }
-    ],
+    "tags": [],
     "title": "Report Title 1"
   },
   {
@@ -29,10 +26,7 @@
   {
     "id": 5,
     "text": "Other displaced fracture of base of first metacarpal bone, left hand, subsequent encounter for fracture with delayed healing",
-    "tags": [
-      { "id": 1, "text": "#goodreport (1)", "background": "bg-green-300" },
-      { "id": 2, "text": "#conditionfound (2)", "background": "bg-red-300" }
-    ],
+    "tags": [],
     "title": "Report Title 5"
   },
   {
