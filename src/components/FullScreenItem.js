@@ -33,7 +33,7 @@ const FullScreenItem = ({
           currentSlide={currentSlide}
           idx={idx}
         />
-        <div className='w-3/4'>
+        <div className='w-3/4 pl-3'>
           <h3 className='font-bold'>{report.title}</h3>
           <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
         </div>
