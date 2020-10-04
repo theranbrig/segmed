@@ -10,7 +10,11 @@ const ClickListItem = ({ report, idx, searchText, setViewReport }) => {
     >
       <span>{idx + 1}. </span>
       <span>
-        <button className='text-left font-bold' onClick={() => setViewReport(idx)}>
+        <button
+          disabled={!searchText.length}
+          className='text-left font-bold'
+          onClick={() => setViewReport(idx)}
+        >
           {report.title}
         </button>
         {' - '}

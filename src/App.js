@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import Tag from './components/Tag';
 import StandardListItem from './components/StandardListItem';
 import ClickListItem from './components/ClickListItem';
+import Input from './components/Input';
 
 function App() {
   const [reports, setReports] = useState([]);
@@ -26,7 +27,7 @@ function App() {
 
   const searchReports = (text) => {
     setSearchText(text);
-    if (!text) {
+    if (!text.length) {
       setFilteredReports([]);
     }
     const filteredReports = reports.filter((report) => {
@@ -39,22 +40,11 @@ function App() {
 
   return (
     <div className='py-12 px-32'>
-      <div className='flex flex-col items-center mb-12'>
-        <input
-          className='border border-black rounded-full px-4'
-          type='text'
-          onChange={(e) => searchReports(e.target.value)}
-          value={searchText}
-        />
-        {searchText.length ? (
-          <p className='inline'>
-            {filteredReports.length} report{filteredReports.length === 1 ? '' : 's'} found for "
-            {searchText}"
-          </p>
-        ) : (
-          <p className='inline'>Search Reports</p>
-        )}
-      </div>
+      <Input
+        searchText={searchText}
+        searchReports={searchReports}
+        filteredReports={filteredReports}
+      />
       <ul className='list-none'>
         {filteredReports.length
           ? filteredReports.map((report, idx) => (
