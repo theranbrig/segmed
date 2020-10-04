@@ -1,24 +1,111 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+
+import Slider from './components/Slider';
+import Highlighter from 'react-highlight-words';
+import Tag from './components/Tag';
 
 function App() {
+  const [reports, setReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [viewReport, setViewReport] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/files.json')
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        setReports(data);
+        console.log(data);
+      });
+  }, []);
+
+  const searchReports = (text) => {
+    setSearchText(text);
+    if (!text) {
+      setFilteredReports([]);
+    }
+    const filteredReports = reports.filter((report) => {
+      const textString = report.text.toLowerCase().split(' ').join('');
+      const searchString = text.toLowerCase().split(' ').join('');
+      return textString.includes(searchString);
+    });
+    setFilteredReports(filteredReports);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='py-12 px-32'>
+      <div className='flex flex-col items-center mb-12'>
+        <input
+          className='border border-black rounded-full px-4'
+          type='text'
+          onChange={(e) => searchReports(e.target.value)}
+          value={searchText}
+        />
+        {searchText.length ? (
+          <p className='inline'>
+            {filteredReports.length} report{filteredReports.length === 1 ? '' : 's'} found for "
+            {searchText}"
+          </p>
+        ) : (
+          <p className='inline'>Search Reports</p>
+        )}
+      </div>
+      <ul className='list-none'>
+        {filteredReports.length
+          ? filteredReports.map((report, idx) => (
+              <li
+                className='grid grid-cols-report text-left py-3 border-t border-t-blue-300 items-start'
+                key={report.id}
+              >
+                <span>{idx + 1}. </span>
+                <button className='text-left' onClick={() => setViewReport(idx)}>
+                  {report.title}
+                  {' - '}
+                  <Highlighter searchWords={[searchText]} textToHighlight={report.text} />
+                </button>{' '}
+                <ul className='text-right'>
+                  {report.tags
+                    .sort((a, b) => a.id - b.id)
+                    .map((tag) => (
+                      <Tag key={tag.id} tag={tag} />
+                    ))}
+                </ul>
+              </li>
+            ))
+          : reports.map((report, idx) => (
+              <li
+                className='grid grid-cols-report text-left py-3 border-t border-t-blue-300 items-start'
+                key={report.id}
+              >
+                <span className='mr-4'>{idx + 1}. </span>
+                <span>
+                  {report.title} - {report.text}
+                </span>
+                <ul className='text-right'>
+                  {report.tags.length ? (
+                    report.tags
+                      .sort((a, b) => a.id - b.id)
+                      .map((tag) => <Tag key={tag.id} tag={tag} />)
+                  ) : (
+                    <p className='text-center'> - </p>
+                  )}
+                </ul>
+              </li>
+            ))}
+      </ul>
+      {viewReport !== null ? (
+        <Slider
+          reports={reports}
+          filteredReports={filteredReports}
+          viewReport={viewReport}
+          setViewReport={setViewReport}
+          setReports={setReports}
+          setFilteredReports={setFilteredReports}
+        />
+      ) : null}
     </div>
   );
 }
