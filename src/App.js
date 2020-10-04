@@ -42,6 +42,8 @@ function App() {
         searchText={searchText}
         searchReports={searchReports}
         filteredReports={filteredReports}
+        setFilteredReports={setFilteredReports}
+        setSearchText={setSearchText}
       />
       <ul className='list-none'>
         {filteredReports.length
