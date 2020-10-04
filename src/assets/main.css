@@ -605,6 +605,10 @@ video {
   }
 }
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
 [class^='number-slide'],
 [class*=' number-slide'] {
   background: white;

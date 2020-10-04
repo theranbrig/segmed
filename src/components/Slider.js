@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import TagReport from './TagReport';
-import Tag from './Tag';
-import Highlighter from 'react-highlight-words';
+import FullScreenItem from './FullScreenItem';
 
-const Slider = (props) => {
+const Slider = ({
+  viewReport,
+  reports,
+  setReports,
+  filteredReports,
+  setFilteredReports,
+  setViewReport,
+  searchText,
+}) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [sliderRef, slider] = useKeenSlider({
-    initial: props.viewReport,
+    initial: viewReport,
     slideChanged(s) {
       setCurrentSlide(s.details().relativeSlide);
     },
@@ -32,35 +38,18 @@ const Slider = (props) => {
       <div className='fixed top-0 left-0 w-full'>
         <div className='navigation-wrapper w-full'>
           <div ref={sliderRef} className='keen-slider min-h-screen '>
-            {props.filteredReports.map((report, idx) => (
-              <div key={report.id} className='keen-slider__slide number-slide1 flex flex-col'>
-                <div className='flex flex-row text-sm justify-between w-1/2 mb-4'>
-                  <p>
-                    Viewing {idx + 1} of {props.filteredReports.length}
-                  </p>
-                  <button
-                    className='border border-black rounded-lg px-3'
-                    onClick={() => props.setViewReport(null)}
-                  >
-                    Close
-                  </button>
-                </div>
-                <div className='flex flex-row justify-between w-1/2'>
-                  <TagReport
-                    report={report}
-                    reports={props.reports}
-                    setReports={props.setReports}
-                    filteredReports={props.filteredReports}
-                    setFilteredReports={props.setFilteredReports}
-                    currentSlide={currentSlide}
-                    idx={idx}
-                  />
-                  <div className='w-3/4'>
-                    <h3 className='font-bold'>{report.title}</h3>
-                    <Highlighter searchWords={[props.searchText]} textToHighlight={report.text} />
-                  </div>
-                </div>
-              </div>
+            {filteredReports.map((report, idx) => (
+              <FullScreenItem
+                report={report}
+                reports={reports}
+                setReports={setReports}
+                filteredReports={filteredReports}
+                setFilteredReports={setFilteredReports}
+                currentSlide={currentSlide}
+                setViewReport={setViewReport}
+                searchText={searchText}
+                idx={idx}
+              />
             ))}
           </div>
           {slider && (
