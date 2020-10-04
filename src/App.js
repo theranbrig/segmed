@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import Slider from './components/Slider';
-import Highlighter from 'react-highlight-words';
-import Tag from './components/Tag';
 import StandardListItem from './components/StandardListItem';
 import ClickListItem from './components/ClickListItem';
 import Input from './components/Input';
