@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className='py-12 px-32'>
+    <div className='p-4 lg:py-12 lg:px-32'>
       <Input
         searchText={searchText}
         searchReports={searchReports}

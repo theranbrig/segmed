@@ -51,7 +51,7 @@ const TagReport = ({
   return (
     <>
       {!loading ? (
-        <div className='border-r border-r-grey-400 pr-4'>
+        <div className='lg:border-r border-r-grey-400 lg:pr-4'>
           <div className='mb-4'>
             <h4 className='border border-grey-400 py-1 px-3 text-center mb-2'>Active Tags</h4>
             {report.tags.map((tag) => (
